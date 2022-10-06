@@ -12,8 +12,20 @@ const displaySingleUser = user =>  {
 }
 
 // Meal db
+
+const toggleSpinner = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+}
+const toggleSearchResult = displayStyle => {
+    document.getElementById('spinner').style.display = displayStyle;
+}
+
+
  const searchMeal = () =>{
     const searchText = document.getElementById('search-field').value;
+    // display spinner
+    toggleSpinner('block');
+    toggleSearchResult('none')
     loadMeals(searchText);
     document.getElementById('search-field').value = '';
 }
@@ -30,15 +42,18 @@ const displayMeals = meals =>{
 
     const conatainer = document.getElementById('meals');
     conatainer.textContent='';
-    meals.forEach( meal => {
+    meals?.forEach( meal => {
         const div = document.createElement('div');
         div.innerHTML =`
         <h1>${meal.strMeal}</h1>
         <button onclick="loadMealDetail('${meal.strMeal}')" >click ME</button>
         `;
         conatainer.appendChild(div)
-})
+});
 
+
+toggleSpinner('none');
+toggleSearchResult('block')
 
 }
 
